@@ -50,12 +50,12 @@ public class MobileBuildRunner
 		}
 
 		string keyAliasName = ReadKeyAliasName ();
-		if (keystorePass != null) {
+		if (keyAliasName != null) {
 			PlayerSettings.Android.keyaliasName = keyAliasName;
 		}
 
 		string keyAliasPass = ReadKeyAliasPass ();
-		if (keystorePass != null) {
+		if (keyAliasPass != null) {
 			PlayerSettings.Android.keyaliasPass = keyAliasPass;
 		}
 
