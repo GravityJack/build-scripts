@@ -38,6 +38,26 @@ public class MobileBuildRunner
 			Directory.CreateDirectory(DEFAULT_BUILD_DIR);
 			output = DEFAULT_ANDROID_APK_FILE;
 		}
+        
+        string keystoreName = ReadKeystoreName ();
+		if (keystoreName != null) {
+			PlayerSettings.Android.keystoreName = keystoreName;
+		}
+
+		string keystorePass = ReadKeystorePass ();
+		if (keystorePass != null) {
+			PlayerSettings.Android.keystorePass = keystorePass;
+		}
+
+		string keyAliasName = ReadKeyAliasName ();
+		if (keystorePass != null) {
+			PlayerSettings.Android.keyaliasName = keyAliasName;
+		}
+
+		string keyAliasPass = ReadKeyAliasPass ();
+		if (keystorePass != null) {
+			PlayerSettings.Android.keyaliasPass = keyAliasPass;
+		}
 
 		new BuildRequest {
 			Output = output,
@@ -112,6 +132,26 @@ public class MobileBuildRunner
 	private static string ReadTargetOutputPath()
 	{
 		return CommandLineReader.GetCustomArgument("outputPath");
+	}
+    
+    private static string ReadKeystoreName()
+	{
+		return CommandLineReader.GetCustomArgument("keystoreName");
+	}
+
+	private static string ReadKeystorePass()
+	{
+		return CommandLineReader.GetCustomArgument("keystorePass");
+	}
+
+	private static string ReadKeyAliasName()
+	{
+		return CommandLineReader.GetCustomArgument("keyAliasName");
+	}
+
+	private static string ReadKeyAliasPass()
+	{
+		return CommandLineReader.GetCustomArgument("keyAliasPass");
 	}
 
 	class BuildRequest
