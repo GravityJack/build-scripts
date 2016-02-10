@@ -153,6 +153,11 @@ public class MobileBuildRunner
 	{
 		return CommandLineReader.GetCustomArgument("keyAliasPass");
 	}
+    
+    private static string ReadBundleIdentifier()
+	{
+		return CommandLineReader.GetCustomArgument("bundleIdentifier");
+	}
 
 	class BuildRequest
 	{
@@ -164,6 +169,12 @@ public class MobileBuildRunner
 		{
 			if (BuildPipeline.isBuildingPlayer)
 				return;
+            
+            string bundleIdentifier = ReadBundleIdentifier();
+            if (bundleIdentifier != null) {
+                PlayerSettings.bundleIdentifier = bundleIdentifier;
+            }
+            
 			Debug.Log (DateTime.Now.ToString() + ": Build " + this.ToString());
 			EditorUserBuildSettings.SwitchActiveBuildTarget (TargetPlatform);
 			AssetDatabase.Refresh();
