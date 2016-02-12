@@ -38,6 +38,26 @@ public class MobileBuildRunner
 			Directory.CreateDirectory(DEFAULT_BUILD_DIR);
 			output = DEFAULT_ANDROID_APK_FILE;
 		}
+        
+        string keystoreName = ReadKeystoreName ();
+		if (keystoreName != null) {
+			PlayerSettings.Android.keystoreName = keystoreName;
+		}
+
+		string keystorePass = ReadKeystorePass ();
+		if (keystorePass != null) {
+			PlayerSettings.Android.keystorePass = keystorePass;
+		}
+
+		string keyAliasName = ReadKeyAliasName ();
+		if (keyAliasName != null) {
+			PlayerSettings.Android.keyaliasName = keyAliasName;
+		}
+
+		string keyAliasPass = ReadKeyAliasPass ();
+		if (keyAliasPass != null) {
+			PlayerSettings.Android.keyaliasPass = keyAliasPass;
+		}
 
 		new BuildRequest {
 			Output = output,
@@ -113,6 +133,31 @@ public class MobileBuildRunner
 	{
 		return CommandLineReader.GetCustomArgument("outputPath");
 	}
+    
+    private static string ReadKeystoreName()
+	{
+		return CommandLineReader.GetCustomArgument("keystoreName");
+	}
+
+	private static string ReadKeystorePass()
+	{
+		return CommandLineReader.GetCustomArgument("keystorePass");
+	}
+
+	private static string ReadKeyAliasName()
+	{
+		return CommandLineReader.GetCustomArgument("keyAliasName");
+	}
+
+	private static string ReadKeyAliasPass()
+	{
+		return CommandLineReader.GetCustomArgument("keyAliasPass");
+	}
+    
+    private static string ReadBundleIdentifier()
+	{
+		return CommandLineReader.GetCustomArgument("bundleIdentifier");
+	}
 
 	class BuildRequest
 	{
@@ -124,6 +169,12 @@ public class MobileBuildRunner
 		{
 			if (BuildPipeline.isBuildingPlayer)
 				return;
+            
+            string bundleIdentifier = ReadBundleIdentifier();
+            if (bundleIdentifier != null) {
+                PlayerSettings.bundleIdentifier = bundleIdentifier;
+            }
+            
 			Debug.Log (DateTime.Now.ToString() + ": Build " + this.ToString());
 			EditorUserBuildSettings.SwitchActiveBuildTarget (TargetPlatform);
 			AssetDatabase.Refresh();
