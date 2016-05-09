@@ -86,7 +86,7 @@ public class MobileBuildRunner
 	static bool ShouldEnableAndroidBuildItem ()
 	{
 		// Suppress unreachable expression warning.
-#pragma warning diable 0429
+#pragma warning disable 0429
 		return MenuOptionsEnabled && !BuildPipeline.isBuildingPlayer 
 			&& EditorUserBuildSettings.selectedBuildTargetGroup == BuildTargetGroup.Android 
 			&& EditorUserBuildSettings.activeBuildTarget == BuildTarget.Android;
@@ -97,7 +97,7 @@ public class MobileBuildRunner
 	static bool ShouldEnableIOSBuildItem ()
 	{
 		// Suppress unreachable expression warning.
-#pragma warning diable 0429
+#pragma warning disable 0429
 		return MenuOptionsEnabled && !BuildPipeline.isBuildingPlayer 
 			&& EditorUserBuildSettings.selectedBuildTargetGroup == BuildTargetGroup.iOS
 			&& EditorUserBuildSettings.activeBuildTarget == BuildTarget.iOS;
